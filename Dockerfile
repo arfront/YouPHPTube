@@ -33,5 +33,3 @@ RUN mkdir /var/www/html/videos
 # set non-root user
 RUN chown -R www-data:www-data /var/www/html/videos
 USER www-data
-
-VOLUME ["/var/www/html/videos"]
