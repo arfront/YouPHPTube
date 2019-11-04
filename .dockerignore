@@ -1,2 +1,6 @@
 Dockerfile
 azure-pipelines.yml
+.github
+.git
+README.md
+.gitignore
