@@ -26,4 +26,5 @@ stages:
         containerRegistry: 'Docker Hub'
         repository: 'arfront/video-portal'
         command: 'buildAndPush'
+        tags: latest
         Dockerfile: '**/Dockerfile'
