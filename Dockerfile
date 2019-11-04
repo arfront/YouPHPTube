@@ -32,5 +32,6 @@ RUN install -d -m 0755 -o www-data -g www-data /var/www/html/videos
 
 # set non-root user
 USER www-data
+RUN chown -R www-data /var/www/html/videos
 
 VOLUME ["/var/www/html/videos"]
