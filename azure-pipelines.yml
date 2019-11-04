@@ -28,5 +28,5 @@ stages:
         command: 'buildAndPush'
         tags: |
           latest
-          $(Build.BuildNumber)
+          $(Build.BuildId)
         Dockerfile: '**/Dockerfile'

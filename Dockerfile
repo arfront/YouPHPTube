@@ -25,10 +25,11 @@ RUN rm -rf /var/www/html/*
 COPY . /var/www/html
 
 # fix permissions
-RUN chown -R www-data. /var/www/html
+
 
 # create volume
 RUN install -d -m 0755 -o www-data -g www-data /var/www/html/videos
+RUN chown -R www-data:www-data /var/www/html
 
 # set non-root user
 USER www-data
