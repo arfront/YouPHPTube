@@ -28,10 +28,10 @@ COPY . /var/www/html
 RUN chown -R www-data. /var/www/html
 
 # create volume
-RUN install -d -m 0755 -o www-data -g www-data /var/www/html/videos
+RUN mkdir /var/www/html/videos  
 
 # set non-root user
+RUN chown -R www-data:www-data /var/www/html/videos
 USER www-data
-RUN chown -R www-data /var/www/html/videos
 
 VOLUME ["/var/www/html/videos"]
