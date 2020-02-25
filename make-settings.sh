@@ -28,6 +28,6 @@ if(!empty(\$_SERVER['SERVER_NAME']) && \$_SERVER['SERVER_NAME']!=='localhost' &&
  * Do NOT change from here
  */
 
-require_once \$global['systemRootPath'].'objects/include_config.php';" > /private/var/www/html/YouPHPTube/videos/configuration.php
+require_once \$global['systemRootPath'].'objects/include_config.php';" > /var/www/html/videos/configuration.php
 
 exec "$@"

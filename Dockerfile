@@ -31,6 +31,17 @@ COPY . /var/www/html
 RUN install -d -m 0755 -o www-data -g www-data /var/www/html/videos
 RUN chown -R www-data:www-data /var/www/html
 
+#create database and import sql
+ENTRYPOINT ["/var/www/html/install-sql.sh"]
+
+#create configuration.php file
+RUN  touch /var/www/html/videos/configuration.php
+
+# setting config
+ENTRYPOINT ["/var/www/html/make-settings.sh"]
+
+
+
 # set non-root user
 USER www-data
 
