@@ -8,8 +8,8 @@ PASSWORD='$DATABASE_PWD'
 
 DBNAME='$DATABASE_NAME'  #数据库名称
 
-ADMINUSER = '$ADMIN_USE'
-ADMINPASSWORD = '$RADMIN_PWD'
+ADMINUSER = '$ADMIN_USER'
+ADMINPASSWORD = '$ADMIN_PWD'
 
 
 
@@ -26,12 +26,12 @@ create_db_sql="create database IF NOT EXISTS ${DBNAME}"
 mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} -e "${create_db_sql}"
 mysql -u ${USERNAME} -p${PASSWORD} ${DBNAME} < /private/var/www/html/YouPHPTube/install/database.sql
 
-sign=`echo -n  $ADMINPASSWORD | md5sum`
+#sign=`echo -n  $ADMINPASSWORD | md5sum`
 sign=`echo -n $ADMINPASSWORD |md5sum|cut -d ' ' -f1`
 
 
 #插入初始化管理员账号
-insert_admin_sql="INSERT INTO users (id, user, email, password, created, modified, isAdmin) VALUES (1, '{$ADMINUSER}', '90333@qq.com', '${sign}', now(), now(), true)"
+insert_admin_sql="INSERT INTO users (id, user, email, password, created, modified, isAdmin) VALUES (1, '{$ADMIN_USER}', '90333@qq.com', '${sign}', now(), now(), true)"
 mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${insert_admin_sql}"
 
 #删除默认分类
