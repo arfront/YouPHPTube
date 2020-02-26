@@ -20,7 +20,7 @@ if(!empty(\$_SERVER['SERVER_NAME']) && \$_SERVER['SERVER_NAME']!=='localhost' &&
 
 \$mysqlHost = '$DATABASE_HOST';
 \$mysqlPort = '$DATABASE_PORT';
-\$mysqlUser = '$DATABASE_USERE';
+\$mysqlUser = '$DATABASE_USER';
 \$mysqlPass = '$DATABASE_PWD';
 \$mysqlDatabase = '$DATABASE_NAME';
 
