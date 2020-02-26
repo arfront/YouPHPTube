@@ -8,8 +8,8 @@ FROM php:7-apache
 MAINTAINER TheAssassin <theassassin@assassinate-you.net>
 
 RUN apt-get update && \
-    apt-get install -y wget vim git zip default-libmysqlclient-dev libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include --with-jpeg-dir=/usr/include && \
+    apt-get install -y wget vim git zip default-libmysqlclient-dev libbz2-dev libonig-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev && \
+    docker-php-ext-configure gd --with-freetype=/usr/include --with-jpeg=/usr/include && \
     docker-php-ext-install -j$(nproc) bcmath bz2 calendar exif gd gettext iconv intl mbstring mysqli opcache pdo_mysql zip && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache && \
     a2enmod rewrite
@@ -29,19 +29,10 @@ COPY . /var/www/html
 
 # create volume
 RUN install -d -m 0755 -o www-data -g www-data /var/www/html/videos
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod a+x /var/www/html/entrypoint.sh /var/www/html/install-sql.sh /var/www/html/make-settings.sh
 
-#create database and import sql
-ENTRYPOINT ["/var/www/html/install-sql.sh"]
-
-#create configuration.php file
-RUN  touch /var/www/html/videos/configuration.php
-
-# setting config
-ENTRYPOINT ["/var/www/html/make-settings.sh"]
-
-
+ENTRYPOINT [ "./entrypoint.sh" ]
 
 # set non-root user
 USER www-data
-
