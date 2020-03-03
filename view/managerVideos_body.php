@@ -696,6 +696,8 @@ if (empty($advancedCustom->disableHTMLDescription)) {
         $(".checkboxVideo").each(function (index) {
             if ($(this).is(":checked")) {
                 vals.push($(this).val());
+            }else {
+                vals.push(1);
             }
         });
         $.ajax({
@@ -724,6 +726,8 @@ if (empty($advancedCustom->disableHTMLDescription)) {
         $(".checkboxVideo").each(function (index) {
             if ($(this).is(":checked")) {
                 vals.push($(this).val());
+            }else{
+                vals.push(1);
             }
         });
         $.ajax({
@@ -754,6 +758,8 @@ if (empty($advancedCustom->disableHTMLDescription)) {
         $(".checkboxVideo").each(function (index) {
             if ($(this).is(":checked")) {
                 vals.push($(this).val());
+            }else{
+                vals.push(1);
             }
         });
         $.ajax({
