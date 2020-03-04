@@ -24,7 +24,7 @@ ADMINPASSWORD=$ADMIN_PWD
 create_db_sql="create database IF NOT EXISTS ${DBNAME}"
 
 mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} -e "${create_db_sql}"
-mysql -u ${USERNAME} -p${PASSWORD} ${DBNAME} < /var/www/html/install/database.sql
+mysql -h${HOSTNAME} -u${USERNAME} -p${PASSWORD} ${DBNAME} < /var/www/html/install/database.sql
 
 #sign=`echo -n  $ADMINPASSWORD | md5sum`
 sign=`echo -n $ADMINPASSWORD |md5sum|cut -d ' ' -f1`
