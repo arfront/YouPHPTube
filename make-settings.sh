@@ -9,7 +9,7 @@ if(!empty(\$_SERVER['SERVER_NAME']) && \$_SERVER['SERVER_NAME']!=='localhost' &&
     \$subDir = str_replace(array(\$_SERVER[\"DOCUMENT_ROOT\"], 'videos/configuration.php'), array('',''), __FILE__);
     \$global['webSiteRootURL'] = \"http\".(!empty(\$_SERVER['HTTPS'])?\"s\":\"\").\"://\".\$_SERVER['SERVER_NAME'].\$subDir;
 }else{
-    \$global['webSiteRootURL'] = '$WEB_URL';
+    \$global['webSiteRootURL'] = 'https://'.'$WEB_URL';
 }
 \$global['systemRootPath'] = '/var/www/html/';
 \$global['salt'] = uniqid();
