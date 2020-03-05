@@ -34,6 +34,7 @@ mysql -h${HOSTNAME} -u${USERNAME} -p${PASSWORD} ${DBNAME} < /var/www/html/instal
 sign=`echo -n $ADMINPASSWORD |md5sum|cut -d ' ' -f1`
 
 
+
 #插入初始化管理员账号
 insert_admin_sql="INSERT INTO users (id, user, email, password, created, modified, isAdmin) VALUES (1, '${ADMINUSER}', '90333@qq.com', '${sign}', now(), now(), true)"
 mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${insert_admin_sql}"
@@ -57,6 +58,4 @@ mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${insert
 
 #插入并S3插件配置
 
-insert_sthree_sql="INSERT INTO plugins (id, uuid, status, created, modified, object_data, name, dirName, pluginversion) VALUES (NULL, '1ddecbec-91db-4357-bb10-ee08b0913778', 'active', now(), now(), '{\"region\":\"cn-northwest-1\",\"bucket_name\":\"${BUCKETNAME}\",\"key\":\"AKIA6E2GEODUOVRFWGPT\",\"secret\":\"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\",\"endpoint\":\"\",\"profile\":\"\",\"useS3DirectLink\":true,\"presignedRequestSecondsTimeout\":\"43200\",\"CDN_Link\":\"\",\"makeMyFilesPublicRead\":false}', 'AWS_S3', 'AWS_S3', '1.0')"
-
-mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${insert_sthree_sql}"
+mysql -h${HOSTNAME} -u${USERNAME} -p${PASSWORD} ${DBNAME} < /var/www/html/aws-init/s3.sql
