@@ -4,11 +4,10 @@ require 'aws/aws-autoloader.php';
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 
-$KEY = 'AKIA6E2GEODUOVRFWGPT';
-$SECRET = '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';
-
-// 存储桶名称需要获取环境变量的值,存储桶必须唯一，起名时需要加前缀
-$BUCKET_NAME = 'arfront-'.uniqid();
+$KEY = $_ENV['AWS_KEY'];
+$SECRET = $_ENV['AWS_SECRET'];
+$ARN = $_ENV['AWS_ARN'];
+$BUCKET_NAME = uniqid('arfront-');
 
 // Create a S3Client
 $credentials = new Aws\Credentials\Credentials($KEY, $SECRET);
@@ -41,7 +40,7 @@ try {
 // Make a policy
 $policy = [
     'Statement' => [
-            [
+        [
             'Action' => [
                 's3:*'
             ],
@@ -73,11 +72,9 @@ try {
     echo $e->getMessage();
     echo "\n";
 }
-$s3sql = "INSERT INTO plugins (id, uuid, status, created, modified, object_data, name, dirName, pluginversion) VALUES (NULL, '1ddecbec-91db-4357-bb10-ee08b0913778', 'active', now(), now(), '{\"region\":\"cn-northwest-1\",\"bucket_name\":\"${BUCKET_NAME}\",\"key\":\"AKIA6E2GEODUOVRFWGPT\",\"secret\":\"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\",\"endpoint\":\"\",\"profile\":\"\",\"useS3DirectLink\":true,\"presignedRequestSecondsTimeout\":\"43200\",\"CDN_Link\":\"\",\"makeMyFilesPublicRead\":false}', 'AWS_S3', 'AWS_S3', '1.0')";
+
+$s3sql = "INSERT INTO plugins (id, uuid, status, created, modified, object_data, name, dirName, pluginversion) VALUES (NULL, '1ddecbec-91db-4357-bb10-ee08b0913778', 'active', now(), now(), '{\"region\":\"cn-northwest-1\",\"bucket_name\":\"{$BUCKET_NAME}\",\"key\":\"{$KEY}\",\"secret\":\"{$SECRET}\",\"endpoint\":\"\",\"profile\":\"\",\"useS3DirectLink\":true,\"presignedRequestSecondsTimeout\":\"43200\",\"CDN_Link\":\"\",\"makeMyFilesPublicRead\":false}', 'AWS_S3', 'AWS_S3', '1.0')";
 
 $sqlfile = fopen("s3.sql", "w");
 fwrite($sqlfile, $s3sql);
 fclose($sqlfile);
-
-
-
