@@ -12,6 +12,7 @@ ADMINUSER=$ADMIN_USER
 ADMINPASSWORD=$ADMIN_PWD
 WEBTITLE=$WEB_TITLE #网站title
 WEBURL='https://'$WEB_URL'.video.poy.cn'; #网站域名
+ENCODERWEBURL='https://'$WEB_URL'.encoder.poy.cn'; #encoder网站域名
 BUCKETNAME=$BUCKET_NAME  #存储桶名字
 
 
@@ -51,7 +52,7 @@ delete_config_sql="DELETE FROM configurations WHERE id = 1";
 mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${delete_config_sql}"
 
 #插入默认配置
-insert_congig_sql="INSERT INTO configurations (id, video_resolution, users_id, version, webSiteTitle, language, contactEmail, encoderURL,  created, modified) VALUES (1, '858:480', 1,'7.8', '${WEBTITLE}', 'en', '907262317@qq.com', '${WEBURL}', now(), now())"
+insert_congig_sql="INSERT INTO configurations (id, video_resolution, users_id, version, webSiteTitle, language, contactEmail, encoderURL,  created, modified) VALUES (1, '858:480', 1,'7.8', '${WEBTITLE}', 'en', '907262317@qq.com', '${ENCODERWEBURL}', now(), now())"
 
 
 mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${insert_congig_sql}"
